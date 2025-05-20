@@ -1,9 +1,8 @@
-discovery.static "my_app" {
-  targets = [env("METRICS_URL")]
-}
+prometheus.exporter.untyped "my_app" {
+  scrape {
+    target = env("METRICS_URL")  # Например, app:3000
+  }
 
-prometheus.scrape "my_app" {
-  targets    = discovery.static.my_app.targets
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
 }
 
