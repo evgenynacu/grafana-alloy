@@ -1,11 +1,5 @@
-local "metrics_url" {
-  value = env("METRICS_URL")
-}
-
-prometheus.scrape "app" {
-  targets = [
-    local.metrics_url,
-  ]
+prometheus.scrape "my_app" {
+  targets = [env("METRICS_URL")]
 }
 
 prometheus.remote_write "grafana_cloud" {
