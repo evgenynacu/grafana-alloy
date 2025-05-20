@@ -1,6 +1,6 @@
 prometheus.exporter.untyped "my_app" {
   scrape {
-    target = env("METRICS_URL")  # Например, app:3000
+    target = env("METRICS_URL")
   }
 
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
