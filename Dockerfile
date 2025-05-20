@@ -1,7 +1,13 @@
-FROM alpine:3.19
+FROM debian:bookworm-slim
 
-RUN apk add --no-cache bash curl gettext unzip
+RUN apt-get update && apt-get install -y \
+    curl \
+    unzip \
+    gettext-base \
+    ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
+# Скачиваем и устанавливаем Alloy
 RUN curl -LO https://github.com/grafana/alloy/releases/download/v1.8.3/alloy-linux-amd64.zip && \
     unzip alloy-linux-amd64.zip && \
     mv alloy-linux-amd64 /usr/bin/alloy && \
