@@ -1,6 +1,6 @@
 prometheus.scrape "my_app" {
   targets = [{
-    __address__ = env("METRICS_URL")
+    __address__ = env("METRICS_URL")б
   }]
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
 }
