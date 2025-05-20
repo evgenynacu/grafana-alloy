@@ -1,21 +1,21 @@
 FROM debian:bookworm-slim
 
+# Устанавливаем нужные утилиты
 RUN apt-get update && apt-get install -y \
     curl \
     unzip \
-    gettext-base \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
-# Скачиваем и устанавливаем Alloy
+# Скачиваем и устанавливаем Alloy (x86_64)
 RUN curl -LO https://github.com/grafana/alloy/releases/download/v1.8.3/alloy-linux-amd64.zip && \
     unzip alloy-linux-amd64.zip && \
     mv alloy-linux-amd64 /usr/bin/alloy && \
     chmod +x /usr/bin/alloy && \
     rm -f alloy-linux-amd64.zip
 
-COPY config.alloy.tmpl /etc/config.alloy.tmpl
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Копируем финальный конфиг (с поддержкой env("..."))
+COPY config.alloy.hcl /etc/config.alloy.hcl
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Запускаем Alloy с конфигом
+ENTRYPOINT ["/usr/bin/alloy", "run", "/etc/config.alloy.hcl"]
