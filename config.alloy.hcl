@@ -7,6 +7,7 @@ prometheus.scrape "my_app" {
   targets = [
     {
       __address__     = env("METRICS_URL"),
+      __scheme__       = "http",
       __metrics_path__ = "/metrics",
     },
   ]
