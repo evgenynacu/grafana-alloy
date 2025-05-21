@@ -9,7 +9,7 @@ prometheus.scrape "my_app" {
       __address__     = env("METRICS_URL"),
       __scheme__      = "http",
       __metrics_path__ = "/metrics",
-    }
+    },
   ]
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
 }
