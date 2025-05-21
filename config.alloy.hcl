@@ -1,6 +1,6 @@
 logging {
   level  = "debug"
-  format = "logfmt"
+  format = "json"
 }
 
 prometheus.scrape "my_app" {
