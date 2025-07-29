@@ -11,6 +11,7 @@ prometheus.scrape "my_app" {
       __metrics_path__ = "/metrics",
     },
   ]
+  scrape_interval = "10s"
   forward_to = [prometheus.remote_write.grafana_cloud.receiver]
 }
 
